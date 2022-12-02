@@ -1,0 +1,19 @@
+--table nasil olusturulur:
+
+--1.yol sifirdan table olusturma:
+
+CREATE TABLE students 
+(
+student_id SMALLINT,
+	student_name VARCHAR(50),
+	student_age SMALLINT,
+	student_dob DATE
+
+);
+SELECT *FROM students;
+-- 2. Yol : Baska bir table kullanarak table olusturma:
+CREATE TABLE student_name_age
+AS SELECT student_name,student_age
+FROM students;
+
+SELECT * FROM students;

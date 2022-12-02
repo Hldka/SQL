@@ -1,0 +1,44 @@
+--Databa(veritabani)olusturma
+create database hld;
+create database abd;
+-- DDL -DATA DEFINITION LANG
+-- Create -Tablo OLUSTURMA
+CREATE TABLE ogrenciler1
+(
+ogrenci_no char(7),
+	isim varchar(20),
+	soyisim varchar(25),
+	not_ort real,-- ondalikli Sayilar icin kullanilir (double gibi)
+	kayit_tarih date
+
+);
+--Varolan tablodan yeni bir tablo olusturma 
+Create Table ogrenci_notlari 
+As -- Benzer tablodaki basliklarla ve data tipleriyle yeni bir tablo olusturmak icin normal
+--tablo olustururken ki parantezler 
+--yerine As kullanip select komutuyla almak istedigimiz verileri aliriz
+SELECT isim,soyisim,not_ort,kayit_tarih From ogrenciler1;
+
+-- DML-DATA manupulation lang.
+--inser (Database'e veri ekleme)
+
+INSERT INTO ogrenciler1 values('1234567','said','ilhan',85.5,now());
+INSERT INTO ogrenciler1 values('1234567','said','ilhan',85.5,'2020-12-11');
+
+--bir tabloya parcali veri eklemek istersek
+Insert into ogrenciler1 (isim,soyisim) values('Hld','Abd');
+CREATE TABLE ogrenciler5
+(
+ogrenci_no char(7),-- Uzunluğunu bildiğimiz stringler için CHAR kullanılır
+isim varchar(20), -- Uzunluğunu bilmediğimiz stringler için VARCHAR kullanırız
+soyisim varchar(25),
+not_ort real,-- Ondalıklı sayılar için kullanılır(Double gibi)
+kayit_tarih date);
+
+--DQL -Data query lang.
+--select
+select * From ogrenciler1;
+select*from notlar;
+
+
+
