@@ -226,6 +226,88 @@ INSERT INTO workers VALUES (10002,'Veli Han',2000);
 INSERT INTO workers VALUES (10003,'Mary Star',7000);
 INSERT INTO workers VALUES (10004,'Angie Ocean',8500);
 SELECT*FROM workers;
+
 --En düsük ve en büyük salary degerine sahip recordlari cagiriniz
+--1.Yol
 SELECT*
-FROM workers WHERE salary=(Select MIN(salary) FROM workers)AND (SElECT MAX(salary) FROM workers);
+FROM workers WHERE salary=(Select MIN(salary) FROM workers)Or salary= (SElECT MAX(salary) FROM workers);
+--2.Yol
+SELECT* FROM
+workers 
+WHERE salary IN ((SELECT MAX(salary) FROM workers),(SELECT MIN(salary) FROM workers));
+--En yüksek salary degerini bulun
+--"As" keyword'u kullanilarak konsola gecici (temporary) field olusturulabilir
+SELECT MAX(salary) As maximum_salary
+FROM workers;
+--En düsük salary degerini bulun
+SELECT MIN(salary) As maximum_salary
+FROM workers;
+--SAlary ortalamasini bulun
+SELECT AVG(salary) AS avarage_salary
+FROM workers;
+--Record sayisini (adetini) bulun
+SELECT COUNT(name) AS number_of_workers
+FROM workers;
+
+--Salary degerlerini toplamini bulunuz
+SELECT SUM(salary) AS total_salary
+FROM workers;
+
+--Interview Question :EN yüksek ikinci salary degerini cagirin.
+SELECT MAX(salary) AS second_highest_salary
+FROM workers
+WHERE salary<(SELECT MAX(salary)FROM workers);
+
+
+--Interview Question EN düsük ikinci salary degerini cagirin.
+SELECT MIN(salary) AS second_lowest_salary
+FROM workers
+WHERE salary>(SELECT MIN(salary)FROM workers);
+--en yüksek ücüncü salary degerini bulun
+
+SELECT MAX(salary) AS third_max_salary
+FROM workers
+WHERE salary<(SELECT MAX(salary) 
+FROM workers
+WHERE salary<(SELECT MAX(salary)FROM workers));
+
+--ödev En düsük ücüncü salary degeri
+
+--Salary degeri en yüksek ikinci degere sahip record'i cagirin
+--1.yol
+SELECT*FROM workers
+WHERE salary=(SELECT MIN(salary) AS second_lowest_salary
+FROM workers
+WHERE salary>(SELECT MIN(salary)FROM workers));
+
+--2.YOL
+SELECT*
+FROM workers
+ORDER BY salary DESC
+OFFSET 1 ROW
+FETCH NEXT 1 ROW ONLY;
+
+--salary degeri en düsük ikinci degere sahip record'u cagirin 1.2.yol
+--salary degeri en düsük ücüncü olan record'i cagirin
+--1.Yol
+SELECT*
+FROM workers
+WHERE salary=(SELECT MAX(salary) 
+FROM workers
+WHERE salary<(SELECT MAX(salary) 
+FROM workers
+WHERE salary<(SELECT MAX(salary)FROM workers))
+			  
+		--2.yol
+SELECT*
+FROM workers
+ORDER BY salary DESC
+			  OFFSET 2 ROW
+			  FETCH NEXT 1 ROW ONLY;
+		
+			  
+			  
+			  
+			  
+			  
+			  
