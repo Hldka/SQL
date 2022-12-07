@@ -191,3 +191,5 @@ SELECT *FROM words ORDER BY number_of_letters DESC;
 SELECT *
 FROM words 
 ORDER BY 3 DESC;
+
+
